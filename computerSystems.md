@@ -1,4 +1,4 @@
-#Computer Systems
+# Computer Systems
 
 ## A tour of computer systems
 * All information in a system, including disk files, programs stored in memory, user data stored in memory and data transferred across a network, is represented as a bunch of bits. The only thing that distinguishes different data objects is the context in which we view them.
@@ -13,7 +13,7 @@
 
 ### Hardware organization of a system
 * Buses
-  * Running througout the system is a collection of electrical conduits called buses that carry bytes of information back and forth between the components. Buses are typically designed to transfer fixed-size chunks of bytes known as words. The number of bytes in a word (the word size) is a fundamental system paramter that varies across systems. Most machines today have word sizes of either 4 bytes (32 bits) or 8 bytes (64 bits).
+  * Running througout the system is a collection of electrical conduits called buses that carry bytes of information back and forth between the components. Buses are typically designed to transfer fixed-size chunks of bytes known as words. The number of bytes in a word (the word size) is a fundamental system parameter that varies across systems. Most machines today have word sizes of either 4 bytes (32 bits) or 8 bytes (64 bits).
 * I/O Devices
   * I/O devices are the system's connection to the external world. 
   * Each I/O device is connected to the I/O bus by either a controller or an adapter. The distinction between the two is mainly one of packaging.
@@ -29,3 +29,23 @@
   * From the time that power is applied to the system until the time that the power is shut off, a processor repeatedly executes the instruction pointed at by the program counter and updates the program counter to point to the next instruction.
   * A processor appears to operate according to a very simple instruction execution model, defined by its instruction set architecture. In this model, instructions execute in strict sequence, and executing a single instruction involves performing a series of steps. 
   * The processor reads the instruction from memory pointed at by the program counter (PC), interprets the bits in the instruction, performs some simple operation dictated by the instruction, and then updates the PC to point to the next instruction, which may or may not be contiguous in memory to the instruction that was just executed. 
+  * There are only a few of these simple operations, and they revolve around main memory, the register file, and the arithmetic/logic unit (ALU). The register file is a small storage device that consists of a collection of word-size registers, each with its own unique name. The ALU computes new data and address values. 
+  * Here are some examples of the simple operations that the CPU might carry out at the request of an instruction
+    * Load: Copy a byte or a word from main memory into a register, overwriting the previous contents of the register.
+    * Store: Copy a byte or a word from a register to a location in main memory, overwriting the previous contents of that location.
+    * Operate: Copy the contents of two registers to the ALU, perform an arithmetic operation on the two words, and store the result in a register, overwriting the previous contents of that register.
+    * Jump: Extract a word from the instruction itself and copy that word into the program counter, overwriting the previous value of the PC.
+
+### Caches Matter
+* The idea behind caching is that a system can get the effect of both a very large memory and a very fast one by exploiting *locality*, the tendency for programs to access data and code in locallized regions. By setting up caches to hold data that are likely to be accessed often, we can perform most memory operations using the fast caches. 
+
+### Storage Devices Form a Hierarchy
+* The storage devices in every computer system are organized as a memory hierarchy. 
+* As we move from the top of the hierarchy to the bottom, the devices become slower, larger, and less costly per byte. The register file occupies the top level in the hierarchy, which is known as level 0. 
+* The main idea of a memory hierarchy is that storage at one level serves as a cache for storage at the next lower level.
+
+### The Operating System Manages the Hardware
+* We can think of the operating system as a layer of software interposed between the application program and the hardware. All attempts by an application program to manipulate the hardware must go through the operating system. 
+* **IMPORTANT** The operating system has two primary purposes.
+  1. To protect the hardware from misuse by runaway applications
+  2. To provide applications with simple and uniform mechanisms for manipulating complicated and often wildly different low-level hardware devices.
